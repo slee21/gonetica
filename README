@@ -1,0 +1,6 @@
+gncli server requirements:
+- .dne or .neta
+- compileable
+- - dynamic links must be expanded
+- - continuous nodes must be discretized
+- - CPTs consistent (no impossible conditions)
