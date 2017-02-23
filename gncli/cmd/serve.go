@@ -129,6 +129,7 @@ func indexNets(env *gonetica.Environment, dir string) ([]*gonetica.Network, map[
 			relPath, _ := filepath.Rel(root, path)
 			// Check if network with name already exists
 			if lookup[name] != nil {
+				net.CloseNetwork()
 				err = fmt.Errorf("In function serve: network named %s already loaded from path %s", name, relPath)
 				log.Println(err)
 				return nil
