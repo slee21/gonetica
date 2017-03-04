@@ -262,10 +262,11 @@ func postNetNode(w rest.ResponseWriter, r *rest.Request) {
 	// Validated target network and node and check for errors
 	if repr, ok := netsJSON[netID]; ok {
 		net := netLookup[netID]
-		// Validate node
+		// Attempt to lookup node by name
 		nodeID := r.PathParam("nodeid")
 		node, err := net.NodeNamed(nodeID)
 		if err != nil {
+			// Attempt to lookup node by index
 			index, err := strconv.Atoi(nodeID)
 			if err != nil {
 				rest.NotFound(w, r)
@@ -276,11 +277,6 @@ func postNetNode(w rest.ResponseWriter, r *rest.Request) {
 				rest.NotFound(w, r)
 				return
 			}
-		}
-		// Check for errors
-		if err != nil {
-			rest.NotFound(w, r)
-			return
 		}
 		// Decode case data from JSON payload and check for errors
 		infer := new(caseJSON)
