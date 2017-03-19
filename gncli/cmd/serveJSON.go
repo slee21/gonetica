@@ -300,6 +300,7 @@ func postNetNode(w rest.ResponseWriter, r *rest.Request) {
 			// Infer value of target node and check for errors
 			result, err := node.Infer()
 			if err != nil {
+				net.ClearCases()
 				net.Unlock()
 				log.Println(err)
 				batch.Results = append(batch.Results, &singleJSON{index, err.Error(), ""})
